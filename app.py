@@ -24,7 +24,11 @@ async def get_cats(request):
     except ValueError:
         return web.json_response({'error': 'n must be integer'}, status=400)
 
+async def get_index():
+    return web.json_response({'a': 'b'})
+
 app = web.Application()
+app.router.add_get('/', get_index)
 app.router.add_get('/facts', get_cats)
 
 if __name__ == '__main__':
