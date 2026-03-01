@@ -24,7 +24,7 @@ async def get_cats(request):
     except ValueError:
         return web.json_response({'error': 'n must be integer'}, status=400)
 
-async def get_index():
+async def get_index(request):
     return web.json_response({'a': 'b'})
 
 app = web.Application()
