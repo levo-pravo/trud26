@@ -1,6 +1,4 @@
-import os
-import asyncio
-import aiohttp
+import os, logging, asyncio, aiohttp
 from aiogram import Bot, Dispatcher, types
 from aiogram.filters import Command
 
@@ -42,4 +40,5 @@ async def main():
 
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO, stream=sys.stdout)
     asyncio.run(main())
