@@ -4,7 +4,7 @@ import aiohttp
 from aiogram import Bot, Dispatcher, types
 from aiogram.filters import Command
 
-TOKEN = os.getenv("BOT_TOKEN")
+TOKEN = os.getenv("TOKEN")
 API_URL = os.getenv("API_URL", "http://api.railway.internal:8080/facts")
 
 bot = Bot(TOKEN)
