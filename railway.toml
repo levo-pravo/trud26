@@ -1,6 +1,16 @@
 [build]
-  builder = "NIXPACKS"
+builder = "NIXPACKS"
 
 [deploy]
-  startCommand = "python app.py"
-  env = { PORT = "8080" }
+# Количество экземпляров сервиса для деплоя
+numReplicas = 1
+
+# Описание сервисов
+[services.api]
+rootDir = "api"
+startCommand = "python app.py"
+env = { PORT = "8080" }
+
+[services.bot]
+rootDir = "bot"
+startCommand = "python bot.py"
