@@ -35,7 +35,6 @@ async def cats_handler(message: types.Message):
 
 
 async def main():
-    #dp.include_routers()  # на будущее, сейчас пусто
     await dp.start_polling(bot)
 
 
