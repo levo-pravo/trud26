@@ -25,7 +25,8 @@ async def cats_handler(message: types.Message, command: CommandObject):
         args = command.args
         cnt = int(args)
     except:
-        await message.answer("Проверьте то, что написали, пожалуйста 😿")
+        await message.answer("Сколько фактов?")
+        return
     try:
         facts = await get_cat_facts(cnt)
         if not facts:
@@ -42,16 +43,6 @@ async def inline_number(inline_query: InlineQuery):
         num = int(inline_query.query)
     except ValueError:
         await inline_query.answer([])
-    results = [
-        InlineQueryResultArticle(
-            id="unique1",
-            title=f"Число: {num}",
-            input_message_content=InputTextMessageContent(
-                message_text=f"Ты выбрал число {num}! Вот сообщение по нему."
-            )
-        )
-    ]
-    await inline_query.answer(results)
     try:
         facts = await get_cat_facts(num)
         if not facts:
@@ -61,6 +52,17 @@ async def inline_number(inline_query: InlineQuery):
         await inline_query.answer(text)
     except Exception:
         await inline_query.answer("Что-то пошло не так с API 😿")
+        return
+    results = [
+        InlineQueryResultArticle(
+            id="unique1",
+            title=f"{num} фактов",
+            input_message_content=InputTextMessageContent(
+                message_text=text
+            )
+        )
+    ]
+    await inline_query.answer(results)
 
 async def main():
     await dp.start_polling(bot)
