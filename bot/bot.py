@@ -53,7 +53,7 @@ async def inline_number(inline_query: InlineQuery):
         results = [
             InlineQueryResultArticle(
                 id=f"fact{num}",
-                title=f"{num} фактов",
+                title=f"{num} факт.!",
                 input_message_content=InputTextMessageContent(
                     message_text=text
                 )
