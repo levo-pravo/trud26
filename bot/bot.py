@@ -43,26 +43,26 @@ async def inline_number(inline_query: InlineQuery):
         num = int(inline_query.query)
     except ValueError:
         await inline_query.answer([])
+        return
     try:
         facts = await get_cat_facts(num)
         if not facts:
-            await inline_query.answer("Фактов нет 😿")
+            await inline_query.answer([])
             return
         text = "🐱 " + "\n🐱 ".join(facts)
-        await inline_query.answer(text)
-    except Exception:
-        await inline_query.answer("Что-то пошло не так с API 😿")
-        return
-    results = [
-        InlineQueryResultArticle(
-            id="unique1",
-            title=f"{num} фактов",
-            input_message_content=InputTextMessageContent(
-                message_text=text
+        results = [
+            InlineQueryResultArticle(
+                id=f"fact{num}",
+                title=f"{num} фактов",
+                input_message_content=InputTextMessageContent(
+                    message_text=text
+                )
             )
-        )
-    ]
-    await inline_query.answer(results)
+        ]
+        await inline_query.answer(results)  # Только список результатов!
+    except Exception as e:
+        print(f"Ошибка: {e}")  # Логируй для дебага
+        await inline_query.answer([])
 
 async def main():
     await dp.start_polling(bot)
