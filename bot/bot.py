@@ -17,7 +17,7 @@ async def get_cat_facts(n: int = 3):
 
 @dp.message(Command("start"))
 async def start_handler(message: types.Message):
-    await message.answer("Привет! Напиши /cats, чтобы получить факты о котах.")
+    await message.answer("Добрый день! Напиши /cats N, чтобы получить факты о котах.\n(для inline-запросов вызывайте в других чатах)")
 
 @dp.message(Command("cats"))
 async def cats_handler(message: types.Message, command: CommandObject):
@@ -59,9 +59,9 @@ async def inline_number(inline_query: InlineQuery):
                 )
             )
         ]
-        await inline_query.answer(results)  # Только список результатов!
+        await inline_query.answer(results)
     except Exception as e:
-        print(f"Ошибка: {e}")  # Логируй для дебага
+        print(f"Ошибка: {e}")
         await inline_query.answer([])
 
 async def main():
